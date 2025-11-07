@@ -2,6 +2,7 @@
 
 import { TokenBalance } from '@/lib/defiService';
 import { Coins, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
 
 interface TokenListProps {
   tokens: TokenBalance[];
@@ -12,12 +13,33 @@ const TOKEN_COLORS: Record<string, { from: string; to: string }> = {
   USDC: { from: 'from-blue-500', to: 'to-cyan-600' },
   USDT: { from: 'from-green-400', to: 'to-emerald-600' },
   DAI: { from: 'from-yellow-400', to: 'to-orange-500' },
+  BTC: { from: 'from-orange-400', to: 'to-yellow-600' },
+  DOGE: { from: 'from-yellow-300', to: 'to-yellow-500' },
+  LINK: { from: 'from-blue-500', to: 'to-blue-700' },
+  SHIB: { from: 'from-red-400', to: 'to-orange-500' },
+  PEPE: { from: 'from-green-500', to: 'to-green-700' },
+  FLOKI: { from: 'from-orange-500', to: 'to-red-600' },
   default: { from: 'from-purple-400', to: 'to-pink-600' },
+};
+
+const TOKEN_ICONS: Record<string, string> = {
+  ETH: '/icon/eth.png',
+  BTC: '/icon/bitcoin.png',
+  USDC: '/icon/usdc.png',
+  DOGE: '/icon/doge.png',
+  LINK: '/icon/link.png',
+  SHIB: '/icon/shiba.png',
+  PEPE: '/icon/pepe.png',
+  FLOKI: '/icon/floki.png',
 };
 
 export function TokenList({ tokens }: TokenListProps) {
   const getTokenColor = (symbol: string) => {
     return TOKEN_COLORS[symbol] || TOKEN_COLORS.default;
+  };
+
+  const getTokenIcon = (symbol: string) => {
+    return TOKEN_ICONS[symbol.toUpperCase()] || null;
   };
 
   const totalValue = tokens.reduce((sum, token) => sum + token.valueUSD, 0);
@@ -60,9 +82,21 @@ export function TokenList({ tokens }: TokenListProps) {
               />
 
               <div className="relative flex items-center gap-4 flex-1">
-                <div className={`w-12 h-12 bg-gradient-to-br ${colors.from} ${colors.to} rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  {token.symbol.charAt(0)}
-                </div>
+                {getTokenIcon(token.symbol) ? (
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg group-hover:scale-110 transition-transform duration-300 bg-white ring-2 ring-gray-100">
+                    <Image
+                      src={getTokenIcon(token.symbol)!}
+                      alt={token.symbol}
+                      width={48}
+                      height={48}
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className={`w-12 h-12 bg-gradient-to-br ${colors.from} ${colors.to} rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    {token.symbol.charAt(0)}
+                  </div>
+                )}
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <div className="font-bold text-gray-900 group-hover:text-purple-700 transition-colors">

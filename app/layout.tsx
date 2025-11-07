@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ChainTracker - Multi-Chain Portfolio Tracker",
   description: "Track your DeFi portfolio across multiple chains with ChainTracker. Monitor tokens, protocols, and assets in real-time.",
+  icons: {
+    icon: '/Chain.ico',
+    apple: '/ChainTracker.png',
+  },
 };
 
 export default function RootLayout({
