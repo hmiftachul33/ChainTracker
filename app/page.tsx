@@ -9,6 +9,7 @@ import { ProtocolStats } from '@/components/ProtocolStats';
 import { PortfolioChart } from '@/components/PortfolioChart';
 import { PortfolioData } from '@/lib/defiService';
 import { SkeletonCard, SkeletonTokenList, SkeletonProtocolStats, SkeletonChart } from '@/components/SkeletonLoader';
+import Image from 'next/image';
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -62,13 +63,18 @@ export default function Home() {
       </div>
 
       <nav className="relative bg-white/80 backdrop-blur-lg shadow-lg border-b border-purple-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg ring-2 ring-purple-100">
+                <Image
+                  src="/ChainTracker.png"
+                  alt="ChainTracker Logo"
+                  width={48}
+                  height={48}
+                  className="object-cover"
+                  priority
+                />
               </div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 ChainTracker
